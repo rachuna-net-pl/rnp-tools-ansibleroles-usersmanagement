@@ -1,0 +1,6 @@
+- name: "Create users accounts"
+  include: create_user_account.yml
+  loop: "{{ input_role_users_on_host }}"
+  loop_control:
+    loop_var: var_user_on_host
+  when: var_user_on_host.username == var_user_account.username
