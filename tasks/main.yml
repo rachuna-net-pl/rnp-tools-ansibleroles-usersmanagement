@@ -1,0 +1,13 @@
+- name: "Create users accounts"
+  include: create_user_accounts.yml
+  loop: "{{ input_role_user_accounts }}"
+  loop_control:
+    loop_var: var_user_account
+  when: input_role_user_accounts is defined
+
+- name: "Create technical accounts"
+  include: create_technical_account.yml
+  loop: "{{ input_role_technical_accounts }}"
+  loop_control:
+    loop_var: var_technical_account
+  when: input_role_technical_accounts is defined
