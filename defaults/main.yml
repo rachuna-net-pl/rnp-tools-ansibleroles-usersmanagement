@@ -1,2 +1,4 @@
 ---
-# defaults file for .
+input_role_technical_accounts: []
+input_role_user_accounts:      []
+input_role_users_on_host:      []
