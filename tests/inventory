@@ -9,6 +9,15 @@ all:
               - username: defaultuser
                 system_groups:
                 - sudo
+            input_role_technical_accounts:
+              - username: ansible_tech_user
+                comment: "Ansible - technical user account"
+                shell: /bin/bash
+                system_groups: sudo
+                uid: 20001
+                gid: 20000
+                public_ssh_key:  ""
+                private_ssh_key: ""
     CentOS:
       hosts:
 
@@ -18,6 +27,15 @@ all:
               - username: defaultuser
                 system_groups:
                 - wheel
+            input_role_technical_accounts:
+              - username: ansible_tech_user
+                comment: "Ansible - technical user account"
+                shell: /bin/bash
+                system_groups: wheel
+                uid: 20001
+                gid: 20000
+                public_ssh_key:  ""
+                private_ssh_key: ""
 
         vmdev-test-centos8.rachuna-net.pl:
             ansible_ssh_host: 192.168.33.102
@@ -25,6 +43,15 @@ all:
               - username: defaultuser
                 system_groups:
                 - wheel
+            input_role_technical_accounts:
+              - username: ansible_tech_user
+                comment: "Ansible - technical user account"
+                shell: /bin/bash
+                system_groups: wheel
+                uid: 20001
+                gid: 20000
+                public_ssh_key:  ""
+                private_ssh_key: ""
     RedHat:
       hosts:
 
@@ -34,6 +61,15 @@ all:
               - username: defaultuser
                 system_groups:
                 - wheel
+            input_role_technical_accounts:
+              - username: ansible_tech_user
+                comment: "Ansible - technical user account"
+                shell: /bin/bash
+                system_groups: wheel
+                uid: 20001
+                gid: 20000
+                public_ssh_key:  ""
+                private_ssh_key: ""
 
         vmdev-test-rhel8.rachuna-net.pl:
             ansible_ssh_host: 192.168.33.104
@@ -41,3 +77,12 @@ all:
               - username: defaultuser
                 system_groups:
                 - wheel
+            input_role_technical_accounts:
+              - username: ansible_tech_user
+                comment: "Ansible - technical user account"
+                shell: /bin/bash
+                system_groups: wheel
+                uid: 20001
+                gid: 20000
+                public_ssh_key:  ""
+                private_ssh_key: ""

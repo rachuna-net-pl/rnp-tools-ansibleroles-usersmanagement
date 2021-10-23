@@ -24,7 +24,13 @@
     register: test_createduser
     changed_when: false
     failed_when: test_createduser.stdout == ""
-  
+
+  - name: Test create users
+    shell: "cat /etc/group |grep ansible_tech_user:x:20000"
+    register: test_createduser
+    changed_when: false
+    failed_when: test_createduser.stdout == ""
+
   - name: Test private key ssh
     shell: "cat /home/defaultuser/.ssh/id_rsa |grep bbb"
     register: test_createidrsa
