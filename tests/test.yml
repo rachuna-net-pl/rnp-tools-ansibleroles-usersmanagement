@@ -1,5 +1,36 @@
 ---
-- hosts: localhost
-  remote_user: root
-  roles:
-    - .
+- hosts: all
+  become: yes
+  remote_user: vagrant
+  gather_facts: yes
+  tasks:
+
+  - include_role:
+        name: ../../
+    vars:
+      input_role_user_accounts:
+        - username: defaultuser
+          comment: "Default User"
+          shell: /bin/bash
+          gid: 10001
+          public_ssh_key: ""
+          private_ssh_key: ""
+          authorized_keys: []
+
+  - name: Test create users
+    shell: "cat /etc/group |grep defaultuser:x:10001"
+    register: test_createduser
+    changed_when: false
+    failed_when: test_createduser.stdout == ""
+
+  # - name: Test hostname in /etc/hosts
+  #   shell: "cat /etc/hosts | grep {{ inventory_hostname.split('.')[0] }}"
+  #   register: test_hosts
+  #   changed_when: false
+  #   failed_when: test_hosts.stdout == ""
+
+  # - name: Test hostname fqdn in /etc/hosts
+  #   shell: "cat /etc/hosts | grep {{ inventory_hostname }}"
+  #   register: test_hosts
+  #   changed_when: false
+  #   failed_when: test_hosts.stdout == ""

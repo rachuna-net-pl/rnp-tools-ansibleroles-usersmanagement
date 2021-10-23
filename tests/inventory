@@ -1,2 +1,43 @@
-localhost
+all:
+  children:
+    Ubuntu:
+      hosts:
 
+        vmdev-test-ubuntu.rachuna-net.pl:
+            ansible_ssh_host: 192.168.33.100
+            input_role_users_on_host:
+              - username: defaultuser
+                system_groups:
+                - sudo
+    CentOS:
+      hosts:
+
+        vmdev-test-centos7.rachuna-net.pl:
+            ansible_ssh_host: 192.168.33.101
+            input_role_users_on_host:
+              - username: defaultuser
+                system_groups:
+                - wheel
+
+        vmdev-test-centos8.rachuna-net.pl:
+            ansible_ssh_host: 192.168.33.102
+            input_role_users_on_host:
+              - username: defaultuser
+                system_groups:
+                - wheel
+    RedHat:
+      hosts:
+
+        vmdev-test-rhel7.rachuna-net.pl:
+            ansible_ssh_host: 192.168.33.103
+            input_role_users_on_host:
+              - username: defaultuser
+                system_groups:
+                - wheel
+
+        vmdev-test-rhel8.rachuna-net.pl:
+            ansible_ssh_host: 192.168.33.104
+            input_role_users_on_host:
+              - username: defaultuser
+                system_groups:
+                - wheel
