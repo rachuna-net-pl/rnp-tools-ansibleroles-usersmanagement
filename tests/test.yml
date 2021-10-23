@@ -13,24 +13,32 @@
           comment: "Default User"
           shell: /bin/bash
           gid: 10001
-          public_ssh_key: ""
-          private_ssh_key: ""
-          authorized_keys: []
+          public_ssh_key: "aaaa"
+          private_ssh_key: "bbb"
+          authorized_keys: 
+            - authorized_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC+v4zMO7+n/JUTvFIGpw8YUYFBf/X7YjmY5wDyy1MiUoBmOdnTh0G4gHTrY4/z5KtcIpUgh3Bod0Q7AQt7Lvq8b8kNfFtQ0eGvH46AaadI0IRTfnYFP0RR8aMdiQAMWIS0IL0zjkiPpWJqcBSeyuMC4Jbib39UJ0RXdMZHXGeyqAZyaZ5EiEUNTSMTQFjP2R2h7FIlcXgXSjjDeSJisK+rDc1/2qYasvPAYvuGKMMMeW+MfQ/j7KfOyMLpdG7sXOskJb2l9EtpfazEcODdBNDVyLv3ddjnBFnfUmvdVfMHmwYfN7YNIToxeCkXVwSBYXcdTPPy9bJU7b00CK4WTNwocdzGIwNjaBYdBXf5AjIFPHxpwkkqi9T+sIldwsjbpoymoJg9jU15K2NKU8gD8WeSXUVID41rP976FHHsj6I8YSALD+3t7QEaPzAYY814+HX8wQ09YOHgC7pwxdcejwlAhmfmP6mE6lfVDL7vC0OIQWIKcxBaZbuvRljJMD6m70U=
+              state: present
 
   - name: Test create users
     shell: "cat /etc/group |grep defaultuser:x:10001"
     register: test_createduser
     changed_when: false
     failed_when: test_createduser.stdout == ""
+  
+  - name: Test private key ssh
+    shell: "cat /home/defaultuser/.ssh/id_rsa |grep bbb"
+    register: test_createidrsa
+    changed_when: false
+    failed_when: test_createidrsa.stdout == ""
 
-  # - name: Test hostname in /etc/hosts
-  #   shell: "cat /etc/hosts | grep {{ inventory_hostname.split('.')[0] }}"
-  #   register: test_hosts
-  #   changed_when: false
-  #   failed_when: test_hosts.stdout == ""
+  - name: Test public key ssh
+    shell: "cat /home/defaultuser/.ssh/id_rsa.pub |grep aaa"
+    register: test_createidrsa
+    changed_when: false
+    failed_when: test_createidrsa.stdout == ""
 
-  # - name: Test hostname fqdn in /etc/hosts
-  #   shell: "cat /etc/hosts | grep {{ inventory_hostname }}"
-  #   register: test_hosts
-  #   changed_when: false
-  #   failed_when: test_hosts.stdout == ""
+  - name: Test authorizedkeys ssh
+    shell: "cat /home/defaultuser/.ssh/authorized_keys |grep ssh-rsa"
+    register: test_createidrsa
+    changed_when: false
+    failed_when: test_createidrsa.stdout == ""
