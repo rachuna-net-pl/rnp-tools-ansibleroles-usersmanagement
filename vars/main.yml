@@ -1,2 +1,1 @@
----
-# vars file for .
+var_defeault_shell: /bin/bash
